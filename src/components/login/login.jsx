@@ -14,11 +14,11 @@ const Login = ({authService}) => {
     };
     return (
         <section className={styles.container}>
-            {/* <Header/> */}
+            <Header/>
             <section >
                 <div className={styles.login}>
                     <h2 >Login</h2>
-                    <p className={styles.desc}>별도의 계정 생성없이 <br/>간편히 가입하세요 👍</p>
+                    <p className={styles.desc}>별도의 계정 생성없이 <br/>간편하게 가입하세요 👍</p>
                 </div>
                 
                 <ul className={styles.login_buttom}>
