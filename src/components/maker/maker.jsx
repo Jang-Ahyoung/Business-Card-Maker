@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import Editor from '../editor/editor';
 import Header from '../header/header';
+import Preview from '../preview/preview';
 import styles from './maker.module.css';
 
 const Maker = ({authService}) =>{
@@ -26,7 +28,13 @@ const Maker = ({authService}) =>{
         <section className ={styles.maker}>
             {/* 로그아웃 버튼 클릭되면 함수 호출  & 위에 함수 선언해줄거야*/}
             <Header onLogout={onLogout}/>
-            <h1>Maker</h1>
+
+            <div className ={styles.container}>
+                {/* 외쪽 : 입력 부분 , 오른쪽 : 프리뷰 부분으로 가득채워 줄거야 */}
+                <Editor/>
+                <Preview/>
+            </div>
+            {/* <h1>Maker</h1> */}
         </section>
 
 

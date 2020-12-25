@@ -2,7 +2,8 @@
 /* @value 선언 변수명,변수명 from '../../(현재 폴더에서 나가고 나가고)/common/colors.css' */
 
 .box {
-  padding: 2.5rem;
+  background-color: lightslategray;
+  padding: 2rem;
   font-size: 1.5rem;
   font-family: "Pacifico", cursive;
   display: flex;
@@ -10,8 +11,8 @@
   align-items: center;
   color: white;
   margin: auto;
-  border-radius: 3rem;
-  width: 25rem;
+  /* border-radius: 3rem; */
+  /* width: 25rem; */
   position: relative;
 }
 .logo {
@@ -28,7 +29,7 @@
   position: absolute;
   /* 이러면 상대 부모의 포지션이 static이 아닌것이 되야되며 부모에는 top, left같은 것이 없기때문에 상관없어! 
   이렇게되면 로그아웃의 포지션은 헤더의 기준으로 변경돼!*/
-  right: -2.7em;
+  right: 1em;
   top: 1em;
   padding: 0.8em;
   border-radius: 20%;
