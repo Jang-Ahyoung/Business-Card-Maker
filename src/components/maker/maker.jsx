@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Editor from '../editor/editor';
 import Header from '../header/header';
@@ -8,6 +8,44 @@ import styles from './maker.module.css';
 const Maker = ({authService}) =>{
     // 코드 많을때 {} 써주고 return 안에 넣어줘
     const history = useHistory();
+    const [cards,setCards] = useState([
+        {
+            id : '1', 
+            name : 'Ang',
+            company : 'angpeng_company',
+            theme : 'dark',
+            title : 'Software Engineer',
+            email : 'ang@gmail.com',
+            message : 'go for it',
+            fileName : 'ang',
+            fileURL : null,
+
+        },
+        {
+            id : '2', 
+            name : 'Peng',
+            company : 'angpeng_company',
+            theme : 'light',
+            title : 'Software Engineer',
+            email : 'peng@gmail.com',
+            message : 'angangang',
+            fileName : 'peng',
+            fileURL : null,
+
+        },
+        {
+            id : '3', 
+            name : 'DaekGi',
+            company : 'angpeng_company',
+            theme : 'coloful',
+            title : 'Software Engineer',
+            email : 'DaekGi@gmail.com',
+            message : 'DaekGi! DaekGi!',
+            fileName : 'DaekGi',
+            fileURL : null,
+
+        }
+    ]);
     const onLogout=()=>{
         authService.logout();
         // 이렇게 만들면 app의 Maker에 가서도 authService 전달해줘야되고 로그아웃 하는 것도 구현(auth_service가서)해줘야해 !
@@ -31,8 +69,8 @@ const Maker = ({authService}) =>{
 
             <div className ={styles.container}>
                 {/* 외쪽 : 입력 부분 , 오른쪽 : 프리뷰 부분으로 가득채워 줄거야 */}
-                <Editor/>
-                <Preview/>
+                <Editor cards ={cards}/>
+                <Preview cards ={cards}/>
             </div>
             {/* <h1>Maker</h1> */}
         </section>

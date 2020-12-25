@@ -1,0 +1,44 @@
+.form {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  margin-bottom: 1em;
+}
+
+.input,
+.select,
+.textarea,
+.button,
+.fileInput {
+  font-size: 0.8rem;
+  width: 100%;
+  border: 0;
+  padding: 0.5em;
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+  background: white;
+}
+.input,
+.select {
+  flex: 1 1 30%;
+  /* 너비를 30%씩 줘서 한줄에 3개씩 나오도록! */
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus,
+.button:focus {
+  outline: 0;
+}
+.textarea {
+  flex-basis: 100%;
+  /* 한줄에 하나씩 나올수있도록! */
+}
+.image_input {
+  flex-basis: 50%;
+  border-bottom: 1px solid black;
+  /* padding: 0;
+  flex: 1 1 50%; */
+}
