@@ -1,8 +1,7 @@
 .editor {
+  padding-bottom: 0.5em;
   flex-basis: 50%;
   background-color: wheat;
-
-  padding: 0.5em 2em;
 }
 
 .title {

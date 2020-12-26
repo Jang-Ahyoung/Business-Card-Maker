@@ -56,6 +56,7 @@ const Maker = ({authService}) =>{
         authService.onAuthChange(user=>{
             if(!user){
                 //이것을 위해 히스토리가 필요 -> 간단히 push 이용하면돼
+                // window.location.replace("/")
                 history.push('/'); 
             }
 

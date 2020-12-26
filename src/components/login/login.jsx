@@ -12,11 +12,14 @@ const Login = ({authService}) => {
         // history 에서는 push이용해서 우리가 가고 싶은 곳 선택해가면돼
         // 여기선 사용자 정보를 함꼐 전달해줘야해 (로그인했을때 콘솔에 찍히는 유니크 아이디 전달해주면돼)
         // history.push('/maker');
+        
         history.push({
+            
             pathname:'/maker',
-            state:{id:userId}, //데이터도 전달
+            state:{id:userId}//데이터도 전달
         });
 
+        // window.location.replace("/maker");
     };
 
     useEffect(()=>{

@@ -10,4 +10,5 @@
   flex-direction: column;
   /* list-style: none; */
   align-items: center;
+  padding-left: 0;
 }
