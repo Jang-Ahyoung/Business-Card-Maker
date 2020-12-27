@@ -29,7 +29,7 @@ function getStyles(theme){
         return styles.dark;
         case 'light':
         return styles.light;
-        case 'coloful':
+        case 'colorful':
         return styles.coloful;
 
         default:
