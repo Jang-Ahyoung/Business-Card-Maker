@@ -3,7 +3,7 @@ import styles from './image_file_input.module.css';
 
 // 이름 받아와야되고 업로드 완료되 파일 바뀌면 불러 줄 수 있는 콜백도 받아와야한다
 const ImageFileInput = ({ imageUploader, name, onFileChange }) => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false); // 로딩중임을 알려주고 핑크색 표시하는것은 state사용!!
 
   const inputRef = useRef(); // 컴포넌트에 접근해 정의한 이름 연결시켜주고
   const onButtonClick = event => {
@@ -21,7 +21,7 @@ const ImageFileInput = ({ imageUploader, name, onFileChange }) => {
     
     console.log(event.target.files[0]);
     console.log(uploaded);
-    setLoading(false);
+    setLoading(false); // 업로딩된 다음
     onFileChange({ // 파일 바뀐거 알려줘야해 -> 업로드된 파일 정보도 함께 리턴해주고 구현해줘
       name: uploaded.original_filename,
       url: uploaded.url, // 이 함수 이용하는 컴포넌트들에도 각각 전달해줘야해
@@ -40,12 +40,10 @@ const ImageFileInput = ({ imageUploader, name, onFileChange }) => {
         // html에서 기본적으로 보여지는 ui를 css로 꾸밀 수 있는 방법은 많이 없고
         // 우리는 css이용해 input를 보여주지않고 우리가 정의한 ui보여준뒤 클릭발생하면 input을 우리가 수동적으로 코드로 클릭할거야
       />
-      {!loading && ( // 
+      {!loading && ( // 로딩이 아닐떄만 보여주도록 할거야
         // 실제로 사용자가 클릭하게될 버튼!
-        <button
-          className={`${styles.button} ${name ? styles.pink : styles.grey}`}
-          onClick={onButtonClick}
-        >
+        <button className={`${styles.button} ${name ? styles.pink : styles.grey}`}onClick={onButtonClick}> 
+        {/* 이름이 있다면  styles.pink*/}
           {name || 'No file'} 
           {/* 선택된 파일이 없어 이름이 없다면 */}
         </button>
