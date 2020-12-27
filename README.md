@@ -9,7 +9,7 @@
 [🏠 <b>homepage</b>](https://github.com/Jang-Ahyoung)
 
 ## 🦸‍♂️ Demo 🦸‍♀️
-> Firebase 활용해 계정 연계 로그인 및 실시간 데이터 베이스 기능  <br /> 사용자는 나만의 비즈니스 카드를 직접 작성할 수 있습니다.
+> - Firebase 활용해 계정 연계 로그인 및 실시간 데이터 베이스 기능  <br /> - 사용자는 나만의 비즈니스 카드를 직접 작성할 수 있습니다.
 
 <!-- <p align="center"> -->
   <img width="452" alt="로그인" src="https://user-images.githubusercontent.com/71692593/103165823-bfafe200-485f-11eb-8eea-a2f3e0e60376.PNG">
