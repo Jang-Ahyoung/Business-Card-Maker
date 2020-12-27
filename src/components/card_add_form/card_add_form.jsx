@@ -1,10 +1,9 @@
-import React, { useRef } from 'react';
+import React, { useRef ,useState} from 'react';
 import styles from './card_add_form.module.css';
 import Button from '../button/button';
-import ImageFileInput from '../image_file_input/image_file_input';
 
 // 4. 나중에 prop으로 전달받은 콜백함수 호출해줄거고
-const CardAddForm = ({ onAdd }) => {
+const CardAddForm = ({ FileInput , onAdd }) => {
   // 2. 폼이 submit(클릭) 되었을때 각각 input의 데이터 읽어오기위해 ref 사용해 현재 컴포넌트 데이터 읽어와 연결해줘야해!
   const formRef = useRef();
   const nameRef = useRef();
@@ -13,6 +12,16 @@ const CardAddForm = ({ onAdd }) => {
   const titleRef = useRef();
   const emailRef = useRef();
   const messageRef = useRef();
+
+  // Add 버튼 누를때만 업데이트 되니깐 파일바뀌면 컴포넌트 자체에서 스테이트로 가지고 있으면 된다
+  const [file, setFile] = useState({ fileName: null, fileURL: null });
+  const onFileChange = file => {
+    console.log(file);
+    setFile({
+      fileName: file.name,
+      fileURL: file.url,
+    });
+  };
 
   const onSubmit = event => {
     console.log(event);
@@ -25,10 +34,11 @@ const CardAddForm = ({ onAdd }) => {
       title: titleRef.current.value || '',
       email: emailRef.current.value || '',
       message: messageRef.current.value || '',
-      fileName: '',
-      fileURL: '',
+      fileName: file.fileName || '',
+      fileURL: file.fileURL || '',
     };
     formRef.current.reset(); // 사용자가 입력해서 제출하면 폼이다 리셋되도록 만들어줘
+    setFile({ fileName: null, fileURL: null }); // 사진 이름도 수정으로 초기화해주면돼 ㅎㅎ
     // 우리가 만든 카드이용해 함수에 전달해주고
     onAdd(card);
   };
@@ -80,8 +90,8 @@ const CardAddForm = ({ onAdd }) => {
         name="message"
         placeholder="Message"
       />
-      <div className={styles.fileInput}>
-        <ImageFileInput />
+      <div className={styles.image_input}>
+        <FileInput name={file.fileName} onFileChange={onFileChange} />
       </div>
       {/* 1-2. Add 함수로 변경해주고 클릭되면 값들 읽어와 카드를 추가해줘야해 */}
       <Button name="Add" onClick={onSubmit} />

@@ -5,7 +5,7 @@ import Header from '../header/header';
 import Preview from '../preview/preview';
 import styles from './maker.module.css';
 
-const Maker = ({authService}) =>{
+const Maker = ({FileInput, authService}) =>{
     // 코드 많을때 {} 써주고 return 안에 넣어줘
     const history = useHistory();
     // []배열 이 아닌 {}오브젝트를 써줄거야
@@ -13,37 +13,37 @@ const Maker = ({authService}) =>{
         // 키는 카드의 아이디이고 이자체가(벨류) 카드인 오브젝트가 될거야
         // 이제 배열이 아니기때문에 전달하는 곳에서 배열이 아닌것을 다 변경해줘야해*(에디터 등등)
         1: {
-          id: '1',
-          name: 'Ellie',
-          company: 'Samsung',
-          theme: 'dark',
-          title: 'Software Engineer',
-          email: 'ellie@gmail.com',
-          message: 'go for it',
-          fileName: 'ellie',
-          fileURL: null,
+            id : '1', 
+            name : 'Ang',
+            company : 'angpeng_company',
+            theme : 'dark',
+            title : 'Software Engineer',
+            email : 'ang@gmail.com',
+            message : 'go for it',
+            fileName : 'ang',
+            fileURL : null,
         },
         2: {
-          id: '2',
-          name: 'Ellie2',
-          company: 'Samsung',
-          theme: 'light',
-          title: 'Software Engineer',
-          email: 'ellie@gmail.com',
-          message: 'go for it',
-          fileName: 'ellie',
-          fileURL: 'ellie.png',
+            id : '2', 
+                    name : 'Peng',
+                    company : 'angpeng_company',
+                    theme : 'light',
+                    title : 'Software Engineer',
+                    email : 'peng@gmail.com',
+                    message : 'angangang',
+                    fileName : 'peng',
+                    fileURL : null,
         },
         3: {
-          id: '3',
-          name: 'Ellie3',
-          company: 'Samsung',
-          theme: 'colorful',
-          title: 'Software Engineer',
-          email: 'ellie@gmail.com',
-          message: 'go for it',
-          fileName: 'ellie',
-          fileURL: null,
+            id : '3', 
+                    name : 'DaekGi',
+                    company : 'angpeng_company',
+                    theme : 'colorful',
+                    title : 'Software Engineer',
+                    email : 'DaekGi@gmail.com',
+                    message : 'DaekGi! DaekGi!',
+                    fileName : 'DaekGi',
+                    fileURL : null,
         },
       });
     // const [cards,setCards] = useState([
@@ -146,8 +146,8 @@ const Maker = ({authService}) =>{
 
             <div className ={styles.container}>
                 {/* 외쪽 : 입력 부분 , 오른쪽 : 프리뷰 부분으로 가득채워 줄거야 */}
-                <Editor cards ={cards} addCard={createOrUpdateCard} updateCard={createOrUpdateCard} deleteCard={deleteCard}/>
-                <Preview cards ={cards}/>
+                <Editor FileInput={FileInput} cards ={cards} addCard={createOrUpdateCard} updateCard={createOrUpdateCard} deleteCard={deleteCard}/>
+                <Preview FileInput={FileInput} cards ={cards}/>
             </div>
             {/* <h1>Maker</h1> */}
         </section>
@@ -155,9 +155,5 @@ const Maker = ({authService}) =>{
 
     );
 }
-
-
-            
-
 
 export default Maker;
