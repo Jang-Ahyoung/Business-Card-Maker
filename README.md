@@ -6,7 +6,7 @@
 
 > React를 이용한 나만의 비즈니스 카드 작성 프로그램  <br /> 
 
-## [🏠 homepage](https://github.com/Jang-Ahyoung)
+[🏠 <b>homepage</b>](https://github.com/Jang-Ahyoung)
 
 ## install
 `yarn`
