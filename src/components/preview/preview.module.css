@@ -1,6 +1,7 @@
 .preview {
   flex-basis: 50%;
   background-color: grey;
+  overflow-y: auto;
 }
 .title {
   text-align: center;

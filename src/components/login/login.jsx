@@ -41,6 +41,8 @@ const Login = ({authService}) => {
         authService.login(event.currentTarget.textContent)
         // .then(console.log);
         .then(data => goToMaker(data.user.uid)); // 데이터 받아지면 goToMaker 호출해 데이터 안의 id오브젝트의 uid를 전달해줄거야
+
+
     };
     return (
         <section className={styles.container}>

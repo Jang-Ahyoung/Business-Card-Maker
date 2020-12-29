@@ -5,46 +5,48 @@ import Header from '../header/header';
 import Preview from '../preview/preview';
 import styles from './maker.module.css';
 
-const Maker = ({FileInput, authService}) =>{
-    // 코드 많을때 {} 써주고 return 안에 넣어줘
+const Maker = ({FileInput, authService,cardRepository}) =>{// 코드 많을때 {} 써주고 return 안에 넣어줘
     const history = useHistory();
-    // []배열 이 아닌 {}오브젝트를 써줄거야
-    const [cards, setCards] = useState({
+    const historyState = useHistory().state;
+    const [userId, setUserId] = useState(historyState && historyState.id); // 히스토리 있다면 히스토리의 아이디값을 별도의 state에 담아 전달해줄거야
+
+    
+    const [cards, setCards] = useState({// []배열 이 아닌 {}오브젝트를 써줄거야
         // 키는 카드의 아이디이고 이자체가(벨류) 카드인 오브젝트가 될거야
         // 이제 배열이 아니기때문에 전달하는 곳에서 배열이 아닌것을 다 변경해줘야해*(에디터 등등)
-        1: {
-            id : '1', 
-            name : 'Ang',
-            company : 'angpeng_company',
-            theme : 'dark',
-            title : 'Software Engineer',
-            email : 'ang@gmail.com',
-            message : 'go for it',
-            fileName : 'ang',
-            fileURL : null,
-        },
-        2: {
-            id : '2', 
-                    name : 'Peng',
-                    company : 'angpeng_company',
-                    theme : 'light',
-                    title : 'Software Engineer',
-                    email : 'peng@gmail.com',
-                    message : 'angangang',
-                    fileName : 'peng',
-                    fileURL : null,
-        },
-        3: {
-            id : '3', 
-                    name : 'DaekGi',
-                    company : 'angpeng_company',
-                    theme : 'colorful',
-                    title : 'Software Engineer',
-                    email : 'DaekGi@gmail.com',
-                    message : 'DaekGi! DaekGi!',
-                    fileName : 'DaekGi',
-                    fileURL : null,
-        },
+        // 1: {
+        //     id : '1', 
+        //     name : 'Ang',
+        //     company : 'angpeng_company',
+        //     theme : 'dark',
+        //     title : 'Software Engineer',
+        //     email : 'ang@gmail.com',
+        //     message : 'go for it',
+        //     fileName : 'ang',
+        //     fileURL : null,
+        // },
+        // 2: {
+        //     id : '2', 
+        //             name : 'Peng',
+        //             company : 'angpeng_company',
+        //             theme : 'light',
+        //             title : 'Software Engineer',
+        //             email : 'peng@gmail.com',
+        //             message : 'angangang',
+        //             fileName : 'peng',
+        //             fileURL : null,
+        // },
+        // 3: {
+        //     id : '3', 
+        //             name : 'DaekGi',
+        //             company : 'angpeng_company',
+        //             theme : 'colorful',
+        //             title : 'Software Engineer',
+        //             email : 'DaekGi@gmail.com',
+        //             message : 'DaekGi! DaekGi!',
+        //             fileName : 'DaekGi',
+        //             fileURL : null,
+        // },
       });
     // const [cards,setCards] = useState([
     //     {
@@ -91,15 +93,27 @@ const Maker = ({FileInput, authService}) =>{
 
     // useEffect 사용해서 사용자의 auth state변경(체인지 일어나 유저 업데이트 된다면)되면 이동해볼거야 -> 콜백함수 전달해 실행되는거야
     useEffect(()=>{
-        authService.onAuthChange(user=>{
-            if(!user){
-                //이것을 위해 히스토리가 필요 -> 간단히 push 이용하면돼
-                // window.location.replace("/")
-                history.push('/'); 
-            }
+      authService.onAuthChange(user => {
+        if (user) {
+          setUserId(user.uid);
+          // console.log(userId);
+        } else {
+          history.push('/');
+        }
+      });
+    });
 
-        });
-    })
+    useEffect(() => {
+      console.log("angangwecandoit!");
+      if (!userId) {
+        return;
+      }
+      const stopSync = cardRepository.syncCards(userId, cards => {
+        // console.log(cards);
+        setCards(cards); 
+      });
+      return () => stopSync();
+    }, [userId]);
 
     // //addCard는 card라는 것을 전달받아
     // const addCard = card => {
@@ -122,12 +136,15 @@ const Maker = ({FileInput, authService}) =>{
   // 동기적으로 할수 없을때도 있다는 이야기! -> 이것을 피하기 위해 컴포넌트에 있는 것에 의존해 값 변경 x 
   // setCards 정의 부분가면 Action이라고 이전을 상태값 받아와 새로운값을 하는 콜백함수를 전달해줄수도 있어<!DOCTYPE html>
   // 이 시점에서의 setCards의 상태 고대로 복사해와 setCards 아이디 이용해 오브젝트 안의 키(card.id)을 해당 그키로 새로 업데이트 되는 card 변경해주고 리턴은 업데이트된 아이들 리턴해주면돼
+
+
   const createOrUpdateCard = card => {
     setCards(cards => {
-      const updated = { ...cards }; // 기존의 카드 전부 복사해와서
-      updated[card.id] = card; //업데이트되는 키 이용해서 오브젝트 전체를 이걸로 변경해줄거야
-      return updated; // 업데이트 설정
+      const updated = { ...cards };// 기존의 카드 전부 복사해와서
+      updated[card.id] = card;//업데이트되는 키 이용해서 오브젝트 전체를 이걸로 변경해줄거야
+      return updated;// 업데이트 설정
     });
+    cardRepository.saveCard(userId, card);
   };
 
 
@@ -137,6 +154,7 @@ const Maker = ({FileInput, authService}) =>{
       delete updated[card.id];
       return updated;
     });
+    cardRepository.removeCard(userId, card);
   };
     
     return(
